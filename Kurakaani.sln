@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kurakaani.Server", "Kurakaani.Server\Kurakaani.Server.csproj", "{89D3C2B6-1268-4067-A66C-D7D10FCCF073}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "kurakaani.client", "kurakaani.client\kurakaani.client.esproj", "{358CB634-37DF-4B7B-9BD0-CD7EE4BCD077}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{89D3C2B6-1268-4067-A66C-D7D10FCCF073}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89D3C2B6-1268-4067-A66C-D7D10FCCF073}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89D3C2B6-1268-4067-A66C-D7D10FCCF073}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89D3C2B6-1268-4067-A66C-D7D10FCCF073}.Release|Any CPU.Build.0 = Release|Any CPU
+		{358CB634-37DF-4B7B-9BD0-CD7EE4BCD077}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{358CB634-37DF-4B7B-9BD0-CD7EE4BCD077}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{358CB634-37DF-4B7B-9BD0-CD7EE4BCD077}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{358CB634-37DF-4B7B-9BD0-CD7EE4BCD077}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{358CB634-37DF-4B7B-9BD0-CD7EE4BCD077}.Release|Any CPU.Build.0 = Release|Any CPU
+		{358CB634-37DF-4B7B-9BD0-CD7EE4BCD077}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AD5859EC-F6BD-4675-9278-7779837B31F0}
+	EndGlobalSection
+EndGlobal
