@@ -20,7 +20,7 @@ export class ChatService {
   public messages: any[] = [];
   public users: string[] = [];
 
-  constructor(private location: Location) {
+  constructor() {
     this.start();
     this.connection.on(
       'ReceiveMessage',
