@@ -9,9 +9,19 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSignalR();
 builder.Services.AddSingleton<IDictionary<string, UserRoomConnection>>(opt =>
     new Dictionary<string, UserRoomConnection>());
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+    });
+});
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -26,9 +36,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors();
+app.UseRouting();
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapHub<ChatHub>(pattern: "/chat");
+    endpoints.MapHub<ChatHub>("/chat");
 });
 
 app.MapControllers();

@@ -18,7 +18,7 @@ namespace Kurakaani.Server.Hub
             await Clients.Group(userConnection.Room!)
                 .SendAsync("ReceiveMessage","Lets program bot", $"{userConnection.User} has joined the group");
 
-            SendConnectedUser(userConnection.Room);
+            await SendConnectedUser(userConnection.Room!);
         }
 
         public async Task SendMessage(string message)
@@ -36,10 +36,10 @@ namespace Kurakaani.Server.Hub
             {
                 return base.OnDisconnectedAsync(ex); 
             }
-            Clients.Group(userConnection.Room)
+            Clients.Group(userConnection.Room!)
                 .SendAsync("ReceiveMessage", "Let Program bot", $"{userConnection.User} has left the group");
 
-            SendConnectedUser(userConnection.Room);
+            SendConnectedUser(userConnection.Room!);
             return base.OnDisconnectedAsync(ex);
         }
         
