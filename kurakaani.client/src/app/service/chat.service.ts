@@ -8,7 +8,7 @@ import * as signalR from '@microsoft/signalr';
 export class ChatService {
 
   public connection : signalR.HubConnection = new signalR.HubConnectionBuilder()
-    .withUrl("http://localhost:5210/chat", {
+    .withUrl("https://localhost:7285/chat", {
       skipNegotiation: true,
           transport: signalR.HttpTransportType.WebSockets
     })

@@ -36,6 +36,8 @@ namespace Kurakaani.Server.Hub
             {
                 return base.OnDisconnectedAsync(ex); 
             }
+
+            _connection.Remove(Context.ConnectionId);
             Clients.Group(userConnection.Room!)
                 .SendAsync("ReceiveMessage", "Let Program bot", $"{userConnection.User} has left the group");
 

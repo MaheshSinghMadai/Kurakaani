@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ChatService } from '../service/chat.service';
 import { Router } from '@angular/router';
 
@@ -7,25 +7,21 @@ import { Router } from '@angular/router';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent {
+export class ChatComponent implements OnInit, AfterViewChecked {
 
   inputMessage : any;
   messages: any[] = [];
   loggedInUserName = sessionStorage.getItem("user");
   roomName = sessionStorage.getItem("room");
 
-  // @ViewChild('scrollMe') private scrollContainer!: ElementRef;
-  
+  @ViewChild('scrollMe') private scrollContainer!: ElementRef;
+
   constructor(
     public chatService: ChatService,
     private router: Router
   ) { }
 
-  // ngAfterViewInit(): void {
-  //   throw new Error('Method not implemented.');
-  // }
-  
-  ngOnInit() {
+  ngOnInit(): void {
     this.chatService.messages$.subscribe(res=>{
       this.messages = res;
       console.log(this.messages)
@@ -36,9 +32,9 @@ export class ChatComponent {
     })
   }
 
-  // ngAfterViewChecked(): void {
-  //   this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
-  // }
+  ngAfterViewChecked(): void {
+    this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
+  }
 
   sendMessage(){
     this.chatService.sendMessage(this.inputMessage)
