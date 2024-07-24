@@ -1,16 +1,16 @@
 import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import * as signalR from '@microsoft/signalr';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ChatService {
-
-  public connection : signalR.HubConnection = new signalR.HubConnectionBuilder()
-    .withUrl("https://localhost:7285/chat", {
+  public connection: signalR.HubConnection = new signalR.HubConnectionBuilder()
+    .withUrl(`${environment.apiUrl}/chat`, {
       skipNegotiation: true,
-          transport: signalR.HttpTransportType.WebSockets
+      transport: signalR.HttpTransportType.WebSockets,
     })
     .configureLogging(signalR.LogLevel.Information)
     .build();
@@ -20,40 +20,43 @@ export class ChatService {
   public messages: any[] = [];
   public users: string[] = [];
 
-  constructor() {
+  constructor(private location: Location) {
     this.start();
-    this.connection.on("ReceiveMessage", (user: string, message: string, messageTime: string)=>{
-      this.messages = [...this.messages, {user, message, messageTime} ];
-      this.messages$.next(this.messages);
-    });
+    this.connection.on(
+      'ReceiveMessage',
+      (user: string, message: string, messageTime: string) => {
+        this.messages = [...this.messages, { user, message, messageTime }];
+        this.messages$.next(this.messages);
+      }
+    );
 
-    this.connection.on("ConnectedUser", (users: any)=>{
+    this.connection.on('ConnectedUser', (users: any) => {
       this.connectedUsers$.next(users);
     });
-   }
+  }
 
   //start connection
-  public async start(){
+  public async start() {
     try {
       await this.connection.start();
-      console.log("Connection is established!")
+      console.log('Connection is established!');
     } catch (error) {
       console.log(error);
     }
   }
 
   //Join Room
-  public async joinRoom(user: string, room: string){
-    return this.connection.invoke("JoinRoom", {user, room})
+  public async joinRoom(user: string, room: string) {
+    return this.connection.invoke('JoinRoom', { user, room });
   }
 
   // Send Messages
-  public async sendMessage(message: string){
-    return this.connection.invoke("SendMessage", message)
+  public async sendMessage(message: string) {
+    return this.connection.invoke('SendMessage', message);
   }
 
   //leave
-  public async leaveChat(){
+  public async leaveChat() {
     return this.connection.stop();
   }
 }
